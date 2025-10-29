@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import Homepage from './componants/homepage.jsx'
+import Homepage from './componants/Homepage.jsx'
 import Viewpost from './componants/Viewpost.jsx'
 //import { Route, Router } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';

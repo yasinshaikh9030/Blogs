@@ -2,6 +2,7 @@ import React from 'react'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import { API_URL } from '../config'
 const Viewpost = () => {
     const [posts, setPosts] = useState([]);
     const dummyuser = "dummyuser";
@@ -15,7 +16,7 @@ const Viewpost = () => {
 
     const postviewer = async () => {
         try {
-            const res = await axios.get("http://localhost:4000/api/v1/blogs/post/getall");
+            const res = await axios.get(`${API_URL}/api/v1/blogs/post/getall`);
             console.log("posts fetched successfully", res.data);
             setPosts(res.data.postdata);
             toast.success("Posts fetched successfully");
@@ -31,7 +32,7 @@ const Viewpost = () => {
 
     const likehandler = async (postid) => {
         try {
-            const res = await axios.post("http://localhost:4000/api/v1/blogs/post/likes", {
+            const res = await axios.post(`${API_URL}/api/v1/blogs/post/likes`, {
                 post: postid,
                 user: dummyuser,
             });
@@ -54,7 +55,7 @@ const Viewpost = () => {
                 toast.error("You haven't liked this post yet");
                 return;
             }
-            const res = await axios.post("http://localhost:4000/api/v1/blogs/post/unlike", {
+            const res = await axios.post(`${API_URL}/api/v1/blogs/post/unlike`, {
                 post: post._id,
                 like: likedId, // Use the stored liked ID
             });
@@ -77,7 +78,7 @@ const Viewpost = () => {
         }
 
         try {
-            const res = await axios.post("http://localhost:4000/api/v1/blogs/comment/create", {
+            const res = await axios.post(`${API_URL}/api/v1/blogs/comment/create`, {
                 post: post._id,
                 user: dummyuser,
                 body: body,
@@ -93,7 +94,7 @@ const Viewpost = () => {
     };
     const viewcomments = async (postId) => {
         try {
-            const res = await axios.get("http://localhost:4000/api/v1/blogs/comment/getall");
+            const res = await axios.get(`${API_URL}/api/v1/blogs/comment/getall`);
             const allComments = res.data.commentdata;
 
             const filtered = allComments.filter((comment) => comment.post === postId);

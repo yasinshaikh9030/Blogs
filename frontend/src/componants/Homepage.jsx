@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { API_URL } from '../config';
 const Homepage = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
@@ -8,7 +9,7 @@ const Homepage = () => {
 
     const posthandler = async () => {
         try {
-            const post = await axios.post("http://localhost:4000/api/v1/blogs/post/create", {
+            const post = await axios.post(`${API_URL}/api/v1/blogs/post/create`, {
                 title,
                 body
             });
